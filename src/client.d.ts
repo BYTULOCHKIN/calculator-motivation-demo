@@ -1,1 +1,1 @@
-/// <reference types="@svg-use/vite/client" />
+/// <reference types="vite-plugin-svgr/client" />

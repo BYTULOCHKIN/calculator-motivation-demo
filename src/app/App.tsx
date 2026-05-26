@@ -12,6 +12,10 @@ import { UndoRedoToolbar } from '@/features/calculator/components/UndoRedoToolba
 import { calculatorDataSchema, validateCalculatorData } from '@/features/calculator/schemas/calculatorSchemas';
 import { useCalculatorStore } from '@/features/calculator/store/calculatorStore';
 import { selectDerivedCalculatorValues } from '@/features/calculator/store/selectors';
+import { exportCalculatorPdf } from '@/features/calculator/utils/exportPdf';
+import DownloadIcon from '@/icons/download.svg?react';
+import RefreshIcon from '@/icons/refresh.svg?react';
+import UploadIcon from '@/icons/upload.svg?react';
 import { Button, Card, TabsList, TabsPanel, TabsRoot, TabsTab } from '@/shared/ui';
 import { useDebouncedEffect, useLocalStorageValue, useMountEffect } from '@react-hookz/web';
 import s from '@/features/calculator/components/calculator.module.css';
@@ -99,6 +103,15 @@ export const App = () => {
     const exportJson = () => {
         setJsonBuffer(JSON.stringify(data, null, 2));
         setImportMessage('Експортовано поточний стан у JSON.');
+    };
+
+    const exportPdf = async () => {
+        try {
+            await exportCalculatorPdf(data, derivedValues);
+            setImportMessage('PDF файл сформовано.');
+        } catch {
+            setImportMessage('Не вдалося сформувати PDF файл.');
+        }
     };
 
     const importJson = () => {
@@ -190,11 +203,22 @@ export const App = () => {
                                 <PerformerSummaryTable rows={derivedValues.performerSummary} />
                             </div>
                             <div className={s.span12}>
-                                <Card title="Імпорт / експорт JSON">
+                                <Card title="Імпорт / експорт">
                                     <div className={s.inlineActions}>
-                                        <Button onClick={exportJson}>Export JSON</Button>
-                                        <Button onClick={importJson}>Import JSON</Button>
+                                        <Button onClick={exportJson}>
+                                            <DownloadIcon />
+                                            Export JSON
+                                        </Button>
+                                        <Button onClick={exportPdf}>
+                                            <DownloadIcon />
+                                            Export PDF
+                                        </Button>
+                                        <Button onClick={importJson}>
+                                            <UploadIcon />
+                                            Import JSON
+                                        </Button>
                                         <Button variant="danger" onClick={resetCalculator}>
+                                            <RefreshIcon />
                                             Reset full calculator
                                         </Button>
                                     </div>

@@ -1,4 +1,7 @@
 import type { TaskRowWithAmount } from '../types';
+import AddIcon from '@/icons/add.svg?react';
+import CopyIcon from '@/icons/copy.svg?react';
+import TrashIcon from '@/icons/trash.svg?react';
 import { Button, Card, Input, SelectInput } from '@/shared/ui';
 import { formatNumber } from '../utils/formatters';
 import { useCalculatorStore } from '../store/calculatorStore';
@@ -33,9 +36,11 @@ export const TaskRowsTable = ({ rows }: TaskRowsTableProps) => {
         <Card title="Призначення етапів / ролей">
             <div className={s.inlineActions}>
                 <Button disabled={isAtLimit} onClick={addTaskRow}>
+                    <AddIcon />
                     Додати рядок
                 </Button>
                 <Button variant="danger" onClick={clearTaskRows}>
+                    <TrashIcon />
                     Очистити всі рядки
                 </Button>
             </div>
@@ -115,6 +120,7 @@ export const TaskRowsTable = ({ rows }: TaskRowsTableProps) => {
                                                     return duplicateTaskRow(row.id);
                                                 }}
                                             >
+                                                <CopyIcon />
                                                 Дублювати
                                             </Button>
                                             <Button
@@ -123,6 +129,7 @@ export const TaskRowsTable = ({ rows }: TaskRowsTableProps) => {
                                                     return deleteTaskRow(row.id);
                                                 }}
                                             >
+                                                <TrashIcon />
                                                 Видалити
                                             </Button>
                                         </div>

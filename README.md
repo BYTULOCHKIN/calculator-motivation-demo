@@ -780,40 +780,32 @@ This methodology can be applied to layouts a well.
 
 ## ✳️ Icons Usage
 
-1. Collect all icons as separate files with `.svg` extension and kebab-case naming.
+> **Note:** We use `vite-plugin-svgr` to handle icons. This ensures that SVGs are transformed into React
+> components and bundled directly into the JavaScript file, which is essential for **cross-origin** compatibility in
+> embed builds.
+
+1. Place icons in `src/icons/` with kebab-case naming.
 
 Example:
 
-```md
-src ├── icons │ ├── arrow-left.svg │ ├── search.svg │ └── arrow-right-circle.svg
+```txt
+src/
+└── icons/
+    ├── arrow-left.svg
+    ├── search.svg
+    └── arrow-right-circle.svg
 ```
 
-2. Import icon required as follows:
+2. To use an icon, import it with the `?react` suffix. This tells Vite to treat the SVG as a React component:
 
 ```ts
-import { Component as ArrowLeftIcon } from '@/icons/arrow-left.svg?svgUse';
+import ArrowLeftIcon from '@/icons/arrow-left.svg?react';
 ```
 
-3. Use the icon as regular JSX component:
+3. Use as JSX:
 
-```ts
+```tsx
 <ArrowLeftIcon className={s.icon} />
-```
-
-Type of the component and its props: Location: `Location: node_modules/@svg-use/react/dist/esm/ThemesExternalSvg.d.ts`
-
-```ts
-declare const createThemedExternalSvg: ({
-    url,
-    id,
-    viewBox,
-}: FactoryProps) => (props: ThemeProps & SVGAttributes<SVGSVGElement>) => JSX.Element;
-
-export interface ThemeProps {
-    color?: string;
-    colorSecondary?: string;
-    colorTertiary?: string;
-}
 ```
 
 ## Getting Started
@@ -841,5 +833,5 @@ npm run dev
 
 Key moments:
 
-- 👉 Import Component names export, then name it as applicable icon naming is.
-- 👉 Autocomplete will support path to the svg file, ⚠️BUT⚠️ you should add ?svgUse param at the end of import statement for @svg-use to work
+- 👉 Import SVGs as default React components.
+- 👉 Autocomplete will support path to the SVG file, but you should add `?react` at the end of the import statement.

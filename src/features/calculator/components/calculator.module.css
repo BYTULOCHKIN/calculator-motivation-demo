@@ -97,6 +97,18 @@
     background: #fff3e8;
 }
 
+.metricLabel {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.metricIcon {
+    flex: 0 0 auto;
+    width: 1rem;
+    height: 1rem;
+}
+
 .metricValue {
     font-weight: 800;
     text-align: right;

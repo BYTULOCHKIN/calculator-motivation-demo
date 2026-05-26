@@ -1,4 +1,9 @@
 import type { ReferenceData } from '../types';
+import AddIcon from '@/icons/add.svg?react';
+import CheckCircleIcon from '@/icons/check-circle.svg?react';
+import ErrorCircleIcon from '@/icons/error-circle.svg?react';
+import RefreshIcon from '@/icons/refresh.svg?react';
+import TrashIcon from '@/icons/trash.svg?react';
 import { Badge, Button, Card, Input } from '@/shared/ui';
 import { referenceDataSchema } from '../schemas/calculatorSchemas';
 import { useCalculatorStore } from '../store/calculatorStore';
@@ -32,8 +37,12 @@ export const ReferenceDataPage = () => {
         <div className={s.grid}>
             <div className={s.span12}>
                 <div className={s.inlineActions}>
-                    <Button onClick={resetReferenceData}>Reset to defaults</Button>
+                    <Button onClick={resetReferenceData}>
+                        <RefreshIcon />
+                        Reset to defaults
+                    </Button>
                     <Badge tone={validationResult.success ? 'neutral' : 'error'}>
+                        {validationResult.success ? <CheckCircleIcon /> : <ErrorCircleIcon />}
                         {validationResult.success ? 'OK' : 'Є помилки'}
                     </Badge>
                 </div>
@@ -65,6 +74,7 @@ export const ReferenceDataPage = () => {
                                                     deleteReferenceOption(list, index);
                                                 }}
                                             >
+                                                <TrashIcon />
                                                 Видалити
                                             </Button>
                                         </div>
@@ -75,6 +85,7 @@ export const ReferenceDataPage = () => {
                                         return addReferenceOption(list);
                                     }}
                                 >
+                                    <AddIcon />
                                     Додати
                                 </Button>
                             </div>

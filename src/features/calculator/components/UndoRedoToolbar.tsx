@@ -1,5 +1,8 @@
 import type { TemporalState } from 'zundo';
 import type { MotivationCalculatorData } from '../types';
+import RedoIcon from '@/icons/redo.svg?react';
+import RefreshIcon from '@/icons/refresh.svg?react';
+import UndoIcon from '@/icons/undo.svg?react';
 import { Button, HelpTooltip } from '@/shared/ui';
 import { useStoreWithEqualityFn } from 'zustand/traditional';
 import { useCalculatorStore } from '../store/calculatorStore';
@@ -35,6 +38,7 @@ export const UndoRedoToolbar = () => {
                         return undo();
                     }}
                 >
+                    <UndoIcon />
                     Undo
                 </Button>
             </HelpTooltip>
@@ -45,6 +49,7 @@ export const UndoRedoToolbar = () => {
                         return redo();
                     }}
                 >
+                    <RedoIcon />
                     Redo
                 </Button>
             </HelpTooltip>
@@ -54,6 +59,7 @@ export const UndoRedoToolbar = () => {
                     return clear();
                 }}
             >
+                <RefreshIcon />
                 Clear history
             </Button>
         </div>

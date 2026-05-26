@@ -1,4 +1,9 @@
 import type { DistributionStatus } from '../types';
+import AddIcon from '@/icons/add.svg?react';
+import CheckCircleIcon from '@/icons/check-circle.svg?react';
+import ErrorCircleIcon from '@/icons/error-circle.svg?react';
+import TrashIcon from '@/icons/trash.svg?react';
+import WarningTriangleIcon from '@/icons/warning-triangle.svg?react';
 import { Badge, Button, Card, Input, SelectInput } from '@/shared/ui';
 import clsx from 'clsx';
 import { formatPercent, parseSafeNumber } from '../utils/formatters';
@@ -36,9 +41,18 @@ export const DistributionTable = ({
     return (
         <Card title="Розподіл %">
             <div className={s.inlineActions}>
-                <Button onClick={addDistributionRow}>Додати підрозділ</Button>
-                <Badge tone={hasError ? 'error' : 'neutral'}>{distributionStatus}</Badge>
-                <Badge tone={unusedPercent > 0 ? 'warning' : 'neutral'}>Вільно {formatPercent(unusedPercent)}</Badge>
+                <Button onClick={addDistributionRow}>
+                    <AddIcon />
+                    Додати підрозділ
+                </Button>
+                <Badge tone={hasError ? 'error' : 'neutral'}>
+                    {hasError ? <ErrorCircleIcon /> : <CheckCircleIcon />}
+                    {distributionStatus}
+                </Badge>
+                <Badge tone={unusedPercent > 0 ? 'warning' : 'neutral'}>
+                    <WarningTriangleIcon />
+                    Вільно {formatPercent(unusedPercent)}
+                </Badge>
             </div>
             <div className={clsx(s.tableWrap, hasError && s.errorMetric)}>
                 <table className={s.table}>
@@ -86,6 +100,7 @@ export const DistributionTable = ({
                                                 return deleteDistributionRow(row.id);
                                             }}
                                         >
+                                            <TrashIcon />
                                             Видалити
                                         </Button>
                                     </td>

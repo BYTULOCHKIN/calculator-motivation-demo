@@ -1,4 +1,5 @@
 import type { ButtonHTMLAttributes, InputHTMLAttributes, ReactNode } from 'react';
+import ChevronDownIcon from '@/icons/chevron-down.svg?react';
 import { Input as BaseInput } from '@base-ui/react/input';
 import { Select } from '@base-ui/react/select';
 import { Tabs } from '@base-ui/react/tabs';
@@ -56,7 +57,9 @@ export const SelectInput = ({
         >
             <Select.Trigger aria-labelledby={labelledBy} className={s.selectTrigger}>
                 <Select.Value placeholder={placeholder} />
-                <Select.Icon>⌄</Select.Icon>
+                <Select.Icon>
+                    <ChevronDownIcon className={s.selectIcon} />
+                </Select.Icon>
             </Select.Trigger>
             <Select.Portal>
                 <Select.Positioner sideOffset={4}>
