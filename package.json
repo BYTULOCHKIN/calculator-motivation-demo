@@ -15,6 +15,7 @@
         "dev:scan": "run-p dev:vite:scan dev:tsc",
         "build": "vite build",
         "preview": "vite preview --host",
+        "test": "vitest run",
         "tsc": "tsc --build",
         "lint:eslint": "eslint --cache --max-warnings 0 --report-unused-disable-directives \"**/*.{js,ts,tsx,cjs,mjs}\"",
         "lint:stylelint": "stylelint --cache -q \"**/*.css\"",
@@ -40,7 +41,9 @@
         "react": "^19.2.3",
         "react-dom": "^19.2.3",
         "sonner": "^2.0.7",
-        "zod": "4.3.5"
+        "zod": "4.3.5",
+        "zundo": "^2.3.0",
+        "zustand": "^5.0.13"
     },
     "devDependencies": {
         "@commitlint/cli": "^20.3.1",
@@ -79,6 +82,7 @@
         "typescript-eslint": "^8.52.0",
         "vite": "^7.3.1",
         "vite-plugin-eslint2": "^5.0.4",
-        "vite-plugin-html": "^3.2.2"
+        "vite-plugin-html": "^3.2.2",
+        "vitest": "^4.1.7"
     }
 }
