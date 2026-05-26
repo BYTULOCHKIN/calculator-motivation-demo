@@ -44,6 +44,7 @@
 
 .input,
 .selectTrigger {
+    color-scheme: light;
     width: 100%;
     min-height: 2.25rem;
     padding: 0.45rem 0.6rem;

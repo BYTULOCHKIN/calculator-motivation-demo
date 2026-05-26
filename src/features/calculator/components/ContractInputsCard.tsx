@@ -1,4 +1,4 @@
-import { Card, Input } from '@/shared/ui';
+import { Card, CurrencyInput, Input } from '@/shared/ui';
 import { parseSafeNumber } from '../utils/formatters';
 import { useCalculatorStore } from '../store/calculatorStore';
 import s from './calculator.module.css';
@@ -16,12 +16,10 @@ export const ContractInputsCard = () => {
             <div className={s.fieldGrid}>
                 <label className={s.field}>
                     <span className={s.label}>СУМА ДОГОВОРУ</span>
-                    <Input
-                        min={0}
-                        type="number"
+                    <CurrencyInput
                         value={contract.contractAmount}
-                        onChange={(event) => {
-                            return updateProjectInput('contractAmount', parseSafeNumber(event.target.value));
+                        onValueChange={(value) => {
+                            updateProjectInput('contractAmount', value);
                         }}
                     />
                 </label>
@@ -40,23 +38,19 @@ export const ContractInputsCard = () => {
                 </label>
                 <label className={s.field}>
                     <span className={s.label}>ВИТРАТИ разові СТОП</span>
-                    <Input
-                        min={0}
-                        type="number"
+                    <CurrencyInput
                         value={contract.oneTimeStopExpenses}
-                        onChange={(event) => {
-                            return updateProjectInput('oneTimeStopExpenses', parseSafeNumber(event.target.value));
+                        onValueChange={(value) => {
+                            updateProjectInput('oneTimeStopExpenses', value);
                         }}
                     />
                 </label>
                 <label className={s.field}>
                     <span className={s.label}>ВИТРАТИ АП/міс СТОП</span>
-                    <Input
-                        min={0}
-                        type="number"
+                    <CurrencyInput
                         value={contract.monthlyStopExpenses}
-                        onChange={(event) => {
-                            return updateProjectInput('monthlyStopExpenses', parseSafeNumber(event.target.value));
+                        onValueChange={(value) => {
+                            updateProjectInput('monthlyStopExpenses', value);
                         }}
                     />
                 </label>

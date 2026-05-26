@@ -3,7 +3,7 @@ import AddIcon from '@/icons/add.svg?react';
 import CopyIcon from '@/icons/copy.svg?react';
 import TrashIcon from '@/icons/trash.svg?react';
 import { Button, Card, Input, SelectInput } from '@/shared/ui';
-import { formatNumber } from '../utils/formatters';
+import { formatMoney } from '../utils/formatters';
 import { useCalculatorStore } from '../store/calculatorStore';
 import s from './calculator.module.css';
 
@@ -107,7 +107,7 @@ export const TaskRowsTable = ({ rows }: TaskRowsTableProps) => {
                                             {row.calculatedAmount === null ? (
                                                 <span className={s.blankCell}>—</span>
                                             ) : (
-                                                formatNumber(row.calculatedAmount)
+                                                formatMoney(row.calculatedAmount)
                                             )}
                                         </div>
                                     </td>

@@ -4,7 +4,7 @@ import MoneyIcon from '@/icons/money.svg?react';
 import WarningTriangleIcon from '@/icons/warning-triangle.svg?react';
 import { Card } from '@/shared/ui';
 import clsx from 'clsx';
-import { formatNumber } from '../utils/formatters';
+import { formatMoney } from '../utils/formatters';
 import s from './calculator.module.css';
 
 type DistributionControlCardProps = {
@@ -36,28 +36,28 @@ export const DistributionControlCard = ({
                         )}
                         Сума до розподілу за %
                     </span>
-                    <strong className={s.metricValue}>{formatNumber(amountToDistributeByPercent)}</strong>
+                    <strong className={s.metricValue}>{formatMoney(amountToDistributeByPercent)}</strong>
                 </div>
                 <div className={s.metric}>
                     <span className={s.metricLabel}>
                         <MoneyIcon className={s.metricIcon} />
                         Розподілено виконавцям
                     </span>
-                    <strong className={s.metricValue}>{formatNumber(distributedToPerformers)}</strong>
+                    <strong className={s.metricValue}>{formatMoney(distributedToPerformers)}</strong>
                 </div>
                 <div className={clsx(s.metric, notDistributedAmongPerformers > 0 && s.warningMetric)}>
                     <span className={s.metricLabel}>
                         <WarningTriangleIcon className={s.metricIcon} />
                         Не розподілено між виконавцями
                     </span>
-                    <strong className={s.metricValue}>{formatNumber(notDistributedAmongPerformers)}</strong>
+                    <strong className={s.metricValue}>{formatMoney(notDistributedAmongPerformers)}</strong>
                 </div>
                 <div className={s.metric}>
                     <span className={s.metricLabel}>
                         <MoneyIcon className={s.metricIcon} />
                         Вільний залишок від чистого доходу
                     </span>
-                    <strong className={s.metricValue}>{formatNumber(freeNetIncomeRemainder)}</strong>
+                    <strong className={s.metricValue}>{formatMoney(freeNetIncomeRemainder)}</strong>
                 </div>
             </div>
         </Card>

@@ -1,7 +1,7 @@
 import type { Content, TDocumentDefinitions } from 'pdfmake/interfaces';
 import type { selectDerivedCalculatorValues } from '../store/selectors';
 import type { MotivationCalculatorData } from '../types';
-import { formatNumber, formatPercent } from './formatters';
+import { formatMoney, formatPercent } from './formatters';
 
 type DerivedCalculatorValues = ReturnType<typeof selectDerivedCalculatorValues>;
 
@@ -63,7 +63,7 @@ export const exportCalculatorPdf = async (data: MotivationCalculatorData, derive
                 safeText(row.comment),
                 safeText(row.performer),
                 safeText(row.department),
-                row.calculatedAmount === null ? emptyValue : formatNumber(row.calculatedAmount),
+                row.calculatedAmount === null ? emptyValue : formatMoney(row.calculatedAmount),
             ];
         }),
     ];
@@ -74,7 +74,7 @@ export const exportCalculatorPdf = async (data: MotivationCalculatorData, derive
             { text: 'К-сть записів', style: 'tableHeader' },
         ],
         ...derivedValues.performerSummary.map((row) => {
-            return [row.performer, formatNumber(row.totalAmount), row.recordCount.toString()];
+            return [row.performer, formatMoney(row.totalAmount), row.recordCount.toString()];
         }),
     ];
 
@@ -152,17 +152,17 @@ export const exportCalculatorPdf = async (data: MotivationCalculatorData, derive
                     [
                         { text: 'Договір / витрати', style: 'sectionTitle' },
                         labeledRows([
-                            ['СУМА ДОГОВОРУ', formatNumber(data.projectInputs.contractAmount)],
+                            ['СУМА ДОГОВОРУ', formatMoney(data.projectInputs.contractAmount)],
                             ['Кількість місяців', data.projectInputs.monthCount.toString()],
-                            ['ВИТРАТИ разові СТОП', formatNumber(data.projectInputs.oneTimeStopExpenses)],
-                            ['ВИТРАТИ АП/міс СТОП', formatNumber(data.projectInputs.monthlyStopExpenses)],
+                            ['ВИТРАТИ разові СТОП', formatMoney(data.projectInputs.oneTimeStopExpenses)],
+                            ['ВИТРАТИ АП/міс СТОП', formatMoney(data.projectInputs.monthlyStopExpenses)],
                         ]),
                     ],
                     [
                         { text: 'Чистий дохід', style: 'sectionTitle' },
                         labeledRows([
-                            ['Чистий Дохід за заключений період', formatNumber(derivedValues.netIncomeTotal)],
-                            ['Чистий Дохід в місяць', formatNumber(derivedValues.netIncomeMonthly)],
+                            ['Чистий Дохід за заключений період', formatMoney(derivedValues.netIncomeTotal)],
+                            ['Чистий Дохід в місяць', formatMoney(derivedValues.netIncomeMonthly)],
                         ]),
                     ],
                 ],
@@ -181,13 +181,13 @@ export const exportCalculatorPdf = async (data: MotivationCalculatorData, derive
                     [
                         { text: 'Контроль розподілу', style: 'sectionTitle' },
                         labeledRows([
-                            ['Сума до розподілу за %', formatNumber(derivedValues.amountToDistributeByPercent)],
-                            ['Розподілено виконавцям', formatNumber(derivedValues.distributedToPerformers)],
+                            ['Сума до розподілу за %', formatMoney(derivedValues.amountToDistributeByPercent)],
+                            ['Розподілено виконавцям', formatMoney(derivedValues.distributedToPerformers)],
                             [
                                 'Не розподілено між виконавцями',
-                                formatNumber(derivedValues.notDistributedAmongPerformers),
+                                formatMoney(derivedValues.notDistributedAmongPerformers),
                             ],
-                            ['Вільний залишок від чистого доходу', formatNumber(derivedValues.freeNetIncomeRemainder)],
+                            ['Вільний залишок від чистого доходу', formatMoney(derivedValues.freeNetIncomeRemainder)],
                         ]),
                     ],
                 ],

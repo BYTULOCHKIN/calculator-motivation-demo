@@ -1,7 +1,7 @@
 import type { PerformerSummaryRow } from '../types';
 import MoneyIcon from '@/icons/money.svg?react';
 import { Card } from '@/shared/ui';
-import { formatNumber } from '../utils/formatters';
+import { formatMoney } from '../utils/formatters';
 import s from './calculator.module.css';
 
 type PerformerSummaryTableProps = {
@@ -28,7 +28,7 @@ export const PerformerSummaryTable = ({ rows }: PerformerSummaryTableProps) => {
                                     <td>
                                         <strong className={s.metricLabel}>
                                             <MoneyIcon className={s.metricIcon} />
-                                            {formatNumber(row.totalAmount)}
+                                            {formatMoney(row.totalAmount)}
                                         </strong>
                                     </td>
                                     <td>{row.recordCount}</td>

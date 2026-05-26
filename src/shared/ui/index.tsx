@@ -1,10 +1,12 @@
 import type { ButtonHTMLAttributes, InputHTMLAttributes, ReactNode } from 'react';
+import { useState } from 'react';
 import ChevronDownIcon from '@/icons/chevron-down.svg?react';
 import { Input as BaseInput } from '@base-ui/react/input';
 import { Select } from '@base-ui/react/select';
 import { Tabs } from '@base-ui/react/tabs';
 import { Tooltip } from '@base-ui/react/tooltip';
 import clsx from 'clsx';
+import { NumericFormat } from 'react-number-format';
 import s from './ui.module.css';
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -28,6 +30,48 @@ export const Button = ({ className, variant = 'primary', ...props }: ButtonProps
 
 export const Input = ({ className, ...props }: InputHTMLAttributes<HTMLInputElement>) => {
     return <BaseInput className={clsx(s.input, className)} {...props} />;
+};
+
+type CurrencyInputProps = {
+    value: number;
+    onValueChange: (_value: number) => void;
+    className?: string;
+    id?: string;
+    name?: string;
+};
+
+export const CurrencyInput = ({ value, onValueChange, className, id, name }: CurrencyInputProps) => {
+    const [draftValue, setDraftValue] = useState<string | null>(null);
+    const displayValue = draftValue ?? (Number.isFinite(value) ? value : '');
+
+    return (
+        <NumericFormat
+            allowNegative={false}
+            allowedDecimalSeparators={['.', ',']}
+            className={clsx(s.input, className)}
+            decimalScale={2}
+            decimalSeparator=","
+            id={id}
+            inputMode="decimal"
+            name={name}
+            suffix=" грн"
+            thousandSeparator=" "
+            value={displayValue}
+            valueIsNumericString={typeof displayValue === 'string'}
+            onFocus={() => {
+                if (draftValue === null && value === 0) {
+                    setDraftValue('');
+                }
+            }}
+            onValueChange={(values) => {
+                setDraftValue(values.value);
+                onValueChange(values.floatValue ?? 0);
+            }}
+            onBlur={() => {
+                setDraftValue(null);
+            }}
+        />
+    );
 };
 
 type SelectInputProps = {
